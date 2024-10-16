@@ -1,0 +1,14 @@
+GET http://localhost:3001/api/notes
+
+###
+GET http://localhost:3001/api/info
+
+###
+
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "from rest client",
+	"important": true
+}

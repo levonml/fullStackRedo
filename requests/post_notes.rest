@@ -1,0 +1,50 @@
+GET https://api.hubapi.com/crm/v3/owners/?limit=100&archived=false
+Content-Type: application/json
+Authorization: Bearer ""
+
+###
+
+GET https://api.hubapi.com/crm/v3/objects/users/249455873338?limit=10&archived=false&properties=hubspot_owner_id,hs_email
+Content-Type: application/json
+Authorization: Bearer ""
+
+###
+
+GET https://api.hubapi.com/crm/v3/objects/contacts/1?properties=hubspot_owner_id
+Authorization: Bearer ""
+
+###
+
+
+PATCH https://api.hubapi.com/crm/v3/objects/deals/23152749701
+Content-Type: application/json
+Authorization: Bearer ""
+
+{
+    "properties": {
+        "hubspot_owner_id": "496892560"
+    }
+}
+
+###
+
+POST https://api.hubapi.com/crm/v3/objects/users/search
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "properties": [
+    "hubspot_owner_id"
+  ],
+  "filterGroups": [
+    {
+      "filters": [
+        {
+          "propertyName": "hs_email",
+          "value": "mika.tienhaara@autokeskus.fi",
+          "operator": "EQ"
+        }
+      ]
+    }
+  ]
+}
