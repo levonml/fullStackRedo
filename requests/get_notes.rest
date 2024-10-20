@@ -5,7 +5,7 @@ GET http://localhost:3001/api/info
 
 ###
 
-POST http://localhost:3001/api/notes
+POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {

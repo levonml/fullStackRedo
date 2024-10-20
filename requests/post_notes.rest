@@ -41,7 +41,7 @@ Authorization: Bearer
       "filters": [
         {
           "propertyName": "hs_email",
-          "value": "mika.tienhaara@autokeskus.fi",
+          "value": "",
           "operator": "EQ"
         }
       ]

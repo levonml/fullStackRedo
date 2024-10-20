@@ -1,6 +1,6 @@
 import express from "express"
 //import cors from "cors"
-
+import Person from "./models/person.js"
 const app = express()
 
 app.use(express.json())
@@ -10,35 +10,19 @@ const unknownEndpoint = (request, response) => {
 	response.status(404).send({ error: "unknown endpoint" })
 }
 
-let notes = [
-	{
-		name: "Arto Hellas",
-		number: "040-123456",
-		id: "1",
-	},
-	{
-		name: "Ada Lovelace",
-		number: "39-44-5323523",
-		id: "2",
-	},
-	{
-		name: "Dan Abramov",
-		number: "12-43-234345",
-		id: "3",
-	},
-	{
-		name: "Mary Poppendieck",
-		number: "39-23-6423122",
-		id: "4",
-	},
-]
-
 app.get("/", (request, response) => {
 	response.send("<h1>Hello World!</h1>")
 })
 
-app.get("/api/persons", (request, response) => {
-	response.json(notes)
+app.get("/api/persons", async (request, response) => {
+	//console.log(">>>>>  person", await Person.find({}))
+	Person.find({}).then((result) => {
+		result.forEach((note) => {
+			//console.log(">>>>>  person", note)
+		})
+		response.json(result)
+		//mongoose.connection.close()
+	})
 })
 
 app.get("/api/persons/:id", (request, response) => {
@@ -47,12 +31,21 @@ app.get("/api/persons/:id", (request, response) => {
 })
 
 app.post("/api/persons", (request, response) => {
-	const note = request.body
-	note.id = Math.floor(Math.random() * 1000)
+	//const note = request.body
+	//note.id = Math.floor(Math.random() * 1000)
+	const person = new Person({
+		name: "Samuel Delon",
+		number: "01",
+	})
 
-	notes.push(note)
-	console.log(">>>>>>>>>>>>>", notes)
-	response.json(notes)
+	person.save().then((result) => {
+		console.log("note saved!")
+		response.json(result)
+		mongoose.connection.close()
+	})
+	//notes.push(note)
+	//console.log(">>>>>>>>>>>>>", notes)
+	//response.json(notes)
 })
 app.get("/api/info", (request, response) => {
 	const info = `Phonebuook has ${notes.length} contacts <br/> ${new Date().toString()}`

@@ -1,0 +1,25 @@
+**FLy.io deployment commands**
+
+fly auth login
+fly launch --no-deploy
+
+**Modifications in the fly.toml file**
+------------------------------------
+[build]
+
+[env]
+  PORT = "3000" # add this
+
+[http_service]
+  internal_port = 3000 # ensure that this is same as PORT
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+------------------------------------
+
+  fly deploy
+
+  fly secrets set MONGO_URI=<url>
