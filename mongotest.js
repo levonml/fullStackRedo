@@ -11,11 +11,11 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const MONGO_URL = `mongodb+srv://lstepany:${password}@cluster0.v0u5e.mongodb.net/Phonebook?retryWrites=true&w=majority&appName=Cluster0`
+const MONGO_URI = `mongodb+srv://lstepany:${password}@cluster0.v0u5e.mongodb.net/Phonebook?retryWrites=true&w=majority&appName=Cluster0`
 //const MONGO_URL = process.env.MONGO_URL
 mongoose.set("strictQuery", false)
 
-mongoose.connect(MONGO_URL)
+mongoose.connect(MONGO_URI)
 
 const noteSchema = new mongoose.Schema({
 	name: String,

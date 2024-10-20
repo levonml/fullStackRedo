@@ -1,10 +1,9 @@
 import mongoose from "mongoose"
-import { MONGO_URL } from "../config/utils.js"
+import { MONGO_URI } from "../config/utils.js"
 
 mongoose.set("strictQuery", false)
-
 mongoose
-	.connect(MONGO_URL)
+	.connect(MONGO_URI)
 	.then((result) => {
 		console.log("connected to MongoDB")
 	})
