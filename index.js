@@ -53,7 +53,7 @@ app.get("/api/info", (request, response) => {
 	response.send(info)
 })
 app.delete("/api/persons/:id", async (request, response) => {
-	const id = request.params.id
+	const id = "sfgf" //request.params.id
 	try {
 		const person = await Person.find({ _id: id })
 		console.log(">>>>>>>>>>>>>>>> pessssssooon", person)
