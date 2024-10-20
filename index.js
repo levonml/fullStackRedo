@@ -55,16 +55,19 @@ app.get("/api/info", (request, response) => {
 app.delete("/api/persons/:id", async (request, response) => {
 	const id = request.params.id
 	try {
-		const person = await Person.find({ id })
+		const person = await Person.find({ _id: id })
+		console.log(">>>>>>>>>>>>>>>> pessssssooon", person)
 		if (!person) {
 			response.status(204).send("this contact doesn't exist")
 		} else {
-			await Person.findByIdAndDelete(id)
-			console.log(">>>>>>> response", json(response))
-			response.status(204).send(response)
+			const respDelete = await Person.findByIdAndDelete(id)
+			const remainingCont = await Person.find({})
+			console.log(">>> remeining", remainingCont)
+			response.status(204).send(remainingCont)
 		}
 	} catch (err) {
-		response.status(500).send(err?.response?.data ?? "an internal error")
+		console.log("??????????? eoorr", err)
+		response.status(500).send(err?.response?.data ?? `an internal error ${err}`)
 	}
 })
 app.use(unknownEndpoint)
